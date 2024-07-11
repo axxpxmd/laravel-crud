@@ -11,6 +11,7 @@ class Mahasiswa extends Model
 
     protected $table = 'mahasiswa';
 
+    // Query get all data
     public static function getAllMahasiswa()
     {
         $data = Mahasiswa::select('*')->get();

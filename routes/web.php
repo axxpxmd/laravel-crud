@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Controller
 use App\Http\Controllers\MahasiswaController;
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('layouts.app');
 });
 

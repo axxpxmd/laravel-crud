@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 // Models
 use App\Models\Mahasiswa;
 
-
 class MahasiswaController extends Controller
 {
     /**

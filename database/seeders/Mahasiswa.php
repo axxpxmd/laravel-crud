@@ -18,11 +18,13 @@ class Mahasiswa extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        for ($i=0; $i <= 10 ; $i++) {
+        for ($i=0; $i < 10 ; $i++) {
+            $kelamin = $faker->randomElement(['Perempuan', 'Laki - Laki']);
+
             AppMahasiswa::create([
                 'nama' => $faker->name,
-                'nim' => $i,
-                'kelamin' => 'laki'
+                'nim' => mt_rand(1000000, 9999999),
+                'kelamin' => $kelamin
             ]);
         }
     }
