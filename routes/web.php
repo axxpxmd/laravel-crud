@@ -11,4 +11,5 @@ Route::get('/', function () {
 
 // Mahaiswa
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+Route::get('/mahasiswa/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
 
