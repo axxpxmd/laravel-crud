@@ -32,7 +32,21 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string',
+            'nim' => 'required|numeric',
+            'kelamin' => 'required|in:Laki - Laki,Perempuan'
+        ]);
+
+        // get parameter
+        $data = $request->all();
+
+        // proces storing data
+        Mahasiswa::create($data);
+
+        return redirect()
+            ->route('mahasiswa.index')
+            ->withSuccess('Data berhasil disimpan');
     }
 
     /**
@@ -48,7 +62,11 @@ class MahasiswaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $data = Mahasiswa::getMahasiswaById($id);
+
+        return view('pages.mahasiswa.edit', compact(
+            'data'
+        ));
     }
 
     /**

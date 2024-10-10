@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('layouts.alerts')
 <a class="btn btn-primary mb-2" href="{{ route('mahasiswa.create') }}">Tambah</a>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -14,6 +15,7 @@
                         <th>Nama</th>
                         <th>NIM</th>
                         <th>Kelamin</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +25,9 @@
                         <td>{{ $i->nama }}</td>
                         <td>{{ $i->nim }}</td>
                         <td>{{ $i->kelamin }}</td>
+                        <td>
+                            <a href="{{ route('mahasiswa.edit', $i->id) }}">Edit</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
