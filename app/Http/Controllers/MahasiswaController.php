@@ -34,7 +34,7 @@ class MahasiswaController extends Controller
     {
         $request->validate([
             'nama' => 'required|string',
-            'nim' => 'required|numeric',
+            'nim' => 'required|numeric|unique:mahasiswa,nim,except,id',
             'kelamin' => 'required|in:Laki - Laki,Perempuan'
         ]);
 
@@ -72,9 +72,23 @@ class MahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string',
+            'nim' => 'required|numeric|unique:mahasiswa,nim,' . $id,
+            'kelamin' => 'required|in:Laki - Laki,Perempuan'
+        ]);
+
+        // get parameter
+        $input = $request->all();
+
+        $data  = Mahasiswa::findOrFail($id);
+        $data->update($input);
+
+        return redirect()
+            ->route('mahasiswa.index')
+            ->withSuccess('Data berhasil diperbaharui');
     }
 
     /**
@@ -82,6 +96,8 @@ class MahasiswaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Mahasiswa::destroy($id);
+
+        return response()->json(['message' => "Berhasil menghapus data."]);
     }
 }

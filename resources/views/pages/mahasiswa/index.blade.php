@@ -27,6 +27,7 @@
                         <td>{{ $i->kelamin }}</td>
                         <td>
                             <a href="{{ route('mahasiswa.edit', $i->id) }}">Edit</a>
+                            <a href="#" onclick="remove('{{ $i->id }}')">Hapus</a>
                         </td>
                     </tr>
                     @endforeach
@@ -36,3 +37,36 @@
     </div>
 </div>
 @endsection
+<script type="text/javascript">
+    function remove(id){
+        Swal.fire({
+            title: "YAKIN ?",
+            text: "Apakah anda yakin ingin menhapus data ini ?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // process delete
+                $.ajax({
+                    url: "{{ route('mahasiswa.delete', ':id') }}".replace(':id', id),
+                    type: "DELETE",
+                    cache: false,
+                    data: {
+                        "_token":  "{{ csrf_token() }}"
+                    },
+                    success:function(response){
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: response.message,
+                            icon: "success"
+                        });
+                        location.reload();
+                    }
+                });
+            }
+        });
+    }
+</script>

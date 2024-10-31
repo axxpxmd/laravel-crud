@@ -6,7 +6,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Edit Data</h6>
     </div>
     <div class="card-body">
-        <form action="{{ route('mahasiswa.store') }}" method="post">
+        <form action="{{ route('mahasiswa.update', $data->id) }}" method="post">
             @csrf
             <div class="form-group">
                 <label for="exampleInputEmail1">Nama</label>
