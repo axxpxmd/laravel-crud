@@ -15,6 +15,8 @@
                         <th>Nama</th>
                         <th>NIM</th>
                         <th>Kelamin</th>
+                        <th>Pekerjaan</th>
+                        <th>Alamat</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -25,6 +27,8 @@
                         <td>{{ $i->nama }}</td>
                         <td>{{ $i->nim }}</td>
                         <td>{{ $i->kelamin }}</td>
+                        <td>{{ $i->mahasiswaDetail->pekerjaan }}</td>
+                        <td>{{ $i->mahasiswaDetail->alamat }}</td>
                         <td>
                             <a href="{{ route('mahasiswa.edit', $i->id) }}">Edit</a>
                             <a href="#" onclick="remove('{{ $i->id }}')">Hapus</a>

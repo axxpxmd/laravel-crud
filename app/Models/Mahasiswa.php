@@ -13,6 +13,10 @@ class Mahasiswa extends Model
     // Query get all data
     public static function getAllMahasiswa()
     {
+        // $data = Mahasiswa::select('*')
+        //     ->join('mahasiswa_detail', 'mahasiswa_detail.mahasiswa_id', '=', 'mahasiswa.id')
+        //     ->get();
+
         $data = Mahasiswa::select('*')->get();
 
         return $data;
@@ -24,5 +28,10 @@ class Mahasiswa extends Model
         $data = Mahasiswa::find($id);
 
         return $data;
+    }
+
+    public function mahasiswaDetail()
+    {
+        return $this->hasOne(MahasiswaDetail::class, 'mahasiswa_id', 'id');
     }
 }

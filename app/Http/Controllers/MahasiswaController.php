@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 // Models
 use App\Models\Mahasiswa;
+use App\Models\MahasiswaDetail;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\TryCatch;
 
 class MahasiswaController extends Controller
 {
@@ -15,6 +18,7 @@ class MahasiswaController extends Controller
     public function index()
     {
         $data = Mahasiswa::getAllMahasiswa();
+        // dd($data);
 
         return view('pages.mahasiswa.index', compact('data'));
     }
@@ -38,11 +42,39 @@ class MahasiswaController extends Controller
             'kelamin' => 'required|in:Laki - Laki,Perempuan'
         ]);
 
-        // get parameter
-        $data = $request->all();
+        // begin
+        DB::beginTransaction();
 
-        // proces storing data
-        Mahasiswa::create($data);
+        try {
+            // tahapan 1
+            $nama = $request->nama;
+            $nim = $request->nim;
+            $kelamin = $request->kelamin;
+
+            $mahasiswa = Mahasiswa::create([
+                'nama' => $nama,
+                'nim' => $nim,
+                'kelamin' => $kelamin
+            ]);
+
+            // tahap 2
+            $alamat = $request->alamat;
+            $pekerjaan = $request->pekerjaan;
+
+            MahasiswaDetail::create([
+                'mahasis_id' => $mahasiswa->id,
+                'alamat' => $alamat,
+                'pekerjaan' => $pekerjaan
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollback();
+            return redirect()
+                ->route('mahasiswa.create')
+                ->withErrors('error server brow');
+        }
+
+        DB::commit();
 
         return redirect()
             ->route('mahasiswa.index')

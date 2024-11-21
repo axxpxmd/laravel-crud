@@ -24,6 +24,14 @@
                     <option value="Perempuan">Perempuan</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Alamat</label>
+                <textarea class="form-control" name="alamat" id="alamat" placeholder="Masukan Alamat" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Pekerjaan</label>
+                <input type="text" class="form-control" name="pekerjaan" id="pekerjaan" placeholder="Pekerjaan" required>
+            </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
     </div>
