@@ -51,7 +51,7 @@
             if (result.isConfirmed) {
                 // process delete
                 $.ajax({
-                    url: "{{ route('mahasiswa.delete', ':id') }}".replace(':id', id),
+                    url: "{{ route('mahasiswa.destroy', ':id') }}".replace(':id', id),
                     type: "DELETE",
                     cache: false,
                     data: {

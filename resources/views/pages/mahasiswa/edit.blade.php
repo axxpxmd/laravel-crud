@@ -6,8 +6,9 @@
         <h6 class="m-0 font-weight-bold text-primary">Edit Data</h6>
     </div>
     <div class="card-body">
-        <form action="{{ route('mahasiswa.update', $data->id) }}" method="post">
+        <form action="{{ route('mahasiswa.update', $data->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="form-group">
                 <label for="exampleInputEmail1">Nama</label>
                 <input type="text" class="form-control" value="{{ $data->nama }}" name="nama" id="nama" placeholder="Nama Mahasiswa" required>
